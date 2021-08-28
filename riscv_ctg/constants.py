@@ -126,6 +126,12 @@ def gen_usign_dataset(bit_width):
     data += [int(t1,2),int(t2,2)]
     return list(set(data))
 
+def zerotoxlen(bit_width):
+    vals = []
+    for i in range(bit_width):
+        vals.append(i)
+    return vals
+
 template_file = os.path.join(root,"data/template.yaml")
 
 usage = Template('''// -----------
@@ -186,4 +192,3 @@ signode_template = Template('''
 $label:
     .fill $n*(XLEN/32),4,0xdeadbeef
 ''')
-
