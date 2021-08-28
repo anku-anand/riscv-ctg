@@ -13,13 +13,19 @@ clmul:
     op_comb: 
       <<: *rfmt_op_comb
     val_comb:
-      abstract_comb:
-        'walking_ones("rs1_val", xlen, False)': 0
-        'walking_ones("rs2_val", xlen, False)': 0
-        'walking_zeros("rs1_val", xlen, False)': 0
-        'walking_zeros("rs2_val", xlen, False)': 0
-        'uniform_random(20, 100, ["rs1_val","rs2_val"], [xlen, xlen])': 0
-        
+      'rs1_val==1 and rs2_val==1': 0
+      'rs1_val==1 and rs2_val==0': 0 
+      'rs1_val==1 and rs2_val==-1': 0
+      'rs1_val==1 and rs2_val==65536': 0
+      'rs1_val==0 and rs2_val==1': 0
+      'rs1_val==0 and rs2_val==0': 0 
+      'rs1_val==0 and rs2_val==-1': 0
+      'rs1_val==0 and rs2_val==65536': 0
+      'rs1_val==-1 and rs2_val==1': 0
+      'rs1_val==-1 and rs2_val==0': 0 
+      'rs1_val==-1 and rs2_val==-1': 0
+      'rs1_val==-1 and rs2_val==65536': 0
+
 clmulh:
     config: 
       - check ISA:=regex(.*RV32.*I.*B.*)
@@ -35,13 +41,19 @@ clmulh:
     op_comb: 
       <<: *rfmt_op_comb
     val_comb:
-      abstract_comb:
-        'walking_ones("rs1_val", xlen, False)': 0
-        'walking_ones("rs2_val", xlen, False)': 0
-        'walking_zeros("rs1_val", xlen, False)': 0
-        'walking_zeros("rs2_val", xlen, False)': 0
-        'uniform_random(20, 100, ["rs1_val","rs2_val"], [xlen, xlen])': 0
-        
+      'rs1_val==1 and rs2_val==1': 0
+      'rs1_val==1 and rs2_val==0': 0 
+      'rs1_val==1 and rs2_val==-1': 0
+      'rs1_val==1 and rs2_val==65536': 0
+      'rs1_val==0 and rs2_val==1': 0
+      'rs1_val==0 and rs2_val==0': 0 
+      'rs1_val==0 and rs2_val==-1': 0
+      'rs1_val==0 and rs2_val==65536': 0
+      'rs1_val==-1 and rs2_val==1': 0
+      'rs1_val==-1 and rs2_val==0': 0 
+      'rs1_val==-1 and rs2_val==-1': 0
+      'rs1_val==-1 and rs2_val==65536': 0
+      
 clmulr:
     config: 
       - check ISA:=regex(.*RV32.*I.*B.*)
@@ -57,9 +69,15 @@ clmulr:
     op_comb: 
       <<: *rfmt_op_comb
     val_comb:
-      abstract_comb:
-        'walking_ones("rs1_val", xlen, False)': 0
-        'walking_ones("rs2_val", xlen, False)': 0
-        'walking_zeros("rs1_val", xlen, False)': 0
-        'walking_zeros("rs2_val", xlen, False)': 0
-        'uniform_random(20, 100, ["rs1_val","rs2_val"], [xlen, xlen])': 0
+      'rs1_val==1 and rs2_val==1': 0
+      'rs1_val==1 and rs2_val==0': 0 
+      'rs1_val==1 and rs2_val==-1': 0
+      'rs1_val==1 and rs2_val==65536': 0
+      'rs1_val==0 and rs2_val==1': 0
+      'rs1_val==0 and rs2_val==0': 0 
+      'rs1_val==0 and rs2_val==-1': 0
+      'rs1_val==0 and rs2_val==65536': 0
+      'rs1_val==-1 and rs2_val==1': 0
+      'rs1_val==-1 and rs2_val==0': 0 
+      'rs1_val==-1 and rs2_val==-1': 0
+      'rs1_val==-1 and rs2_val==65536': 0

@@ -6,16 +6,14 @@ add.uw:
       add.uw: 0
     rs1: 
       <<: *all_regs
-    rs2: 
-      <<: *all_regs
     rd:
       <<: *all_regs
     op_comb: 
-      <<: *rfmt_op_comb
+      <<: *ifmt_op_comb
     val_comb:
-      abstract_comb:      
-        'byte_count(64, ["rs1_val","rs2_val"])': 0
-        'uniform_random(20, 100, ["rs1_val","rs2_val"], [64, 64])': 0
+      abstract_comb:
+        'walking_ones("rs1_val", xlen)': 0
+        'walking_ones("rs2_val", xlen)': 0
         
 sh1add:
     config: 
@@ -25,19 +23,20 @@ sh1add:
       sh1add: 0
     rs1: 
       <<: *all_regs
-    rs2: 
-      <<: *all_regs
     rd:
       <<: *all_regs
     op_comb: 
-      <<: *rfmt_op_comb
+      <<: *ifmt_op_comb
     val_comb:
-      abstract_comb:      
-        'walking_ones("rs1_val", xlen, False)': 0
-        'walking_ones("rs2_val", xlen, False)': 0
-        'walking_zeros("rs1_val", xlen, False)': 0
-        'walking_zeros("rs2_val", xlen, False)': 0
-        
+      <<: [*base_rs1val_sgn , *base_rs2val_sgn , *rfmt_val_comb_sgn]
+      abstract_comb:
+        'sp_dataset(xlen)': 0
+        'walking_ones("rs1_val", xlen)': 0
+        'walking_zeros("rs1_val", xlen)': 0
+        'alternate("rs1_val",xlen)': 0
+        'walking_ones("rs2_val", xlen)': 0
+        'walking_zeros("rs2_val", xlen)': 0
+        'alternate("rs2_val",xlen)': 0
         
 sh1add.uw:
     config: 
@@ -47,17 +46,20 @@ sh1add.uw:
       sh1add.uw: 0
     rs1: 
       <<: *all_regs
-    rs2: 
-      <<: *all_regs
     rd:
       <<: *all_regs
     op_comb: 
-      <<: *rfmt_op_comb
+      <<: *ifmt_op_comb
     val_comb:
-      abstract_comb:      
-        'byte_count(64, ["rs1_val","rs2_val"])': 0
-        'uniform_random(20, 100, ["rs1_val","rs2_val"], [64, 64])': 0
-
+      <<: [*base_rs1val_sgn , *base_rs2val_sgn , *rfmt_val_comb_sgn]
+      abstract_comb:
+        'sp_dataset(xlen)': 0
+        'walking_ones("rs1_val", xlen)': 0
+        'walking_zeros("rs1_val", xlen)': 0
+        'alternate("rs1_val",xlen)': 0
+        'walking_ones("rs2_val", xlen)': 0
+        'walking_zeros("rs2_val", xlen)': 0
+        'alternate("rs2_val",xlen)': 0
         
 sh2add:
     config: 
@@ -67,18 +69,20 @@ sh2add:
       sh2add: 0
     rs1: 
       <<: *all_regs
-    rs2: 
-      <<: *all_regs
     rd:
       <<: *all_regs
     op_comb: 
-      <<: *rfmt_op_comb
+      <<: *ifmt_op_comb
     val_comb:
-      abstract_comb:      
-        'walking_ones("rs1_val", xlen, False)': 0
-        'walking_ones("rs2_val", xlen, False)': 0
-        'walking_zeros("rs1_val", xlen, False)': 0
-        'walking_zeros("rs2_val", xlen, False)': 0
+      <<: [*base_rs1val_sgn , *base_rs2val_sgn , *rfmt_val_comb_sgn]
+      abstract_comb:
+        'sp_dataset(xlen)': 0
+        'walking_ones("rs1_val", xlen)': 0
+        'walking_zeros("rs1_val", xlen)': 0
+        'alternate("rs1_val",xlen)': 0
+        'walking_ones("rs2_val", xlen)': 0
+        'walking_zeros("rs2_val", xlen)': 0
+        'alternate("rs2_val",xlen)': 0
         
 sh2add.uw:
     config: 
@@ -88,17 +92,21 @@ sh2add.uw:
       sh2add.uw: 0
     rs1: 
       <<: *all_regs
-    rs2: 
-      <<: *all_regs
     rd:
       <<: *all_regs
     op_comb: 
-      <<: *rfmt_op_comb
+      <<: *ifmt_op_comb
     val_comb:
-      abstract_comb:      
-        'byte_count(64, ["rs1_val","rs2_val"])': 0
-        'uniform_random(20, 100, ["rs1_val","rs2_val"], [64, 64])': 0
-              
+      <<: [*base_rs1val_sgn , *base_rs2val_sgn , *rfmt_val_comb_sgn]
+      abstract_comb:
+        'sp_dataset(xlen)': 0
+        'walking_ones("rs1_val", xlen)': 0
+        'walking_zeros("rs1_val", xlen)': 0
+        'alternate("rs1_val",xlen)': 0
+        'walking_ones("rs2_val", xlen)': 0
+        'walking_zeros("rs2_val", xlen)': 0
+        'alternate("rs2_val",xlen)': 0
+        
 sh3add:
     config: 
       - check ISA:=regex(.*RV64.*I.*B.*)
@@ -107,18 +115,20 @@ sh3add:
       sh3add: 0
     rs1: 
       <<: *all_regs
-    rs2: 
-      <<: *all_regs
     rd:
       <<: *all_regs
     op_comb: 
-      <<: *rfmt_op_comb
+      <<: *ifmt_op_comb
     val_comb:
-      abstract_comb:      
-        'walking_ones("rs1_val", xlen, False)': 0
-        'walking_ones("rs2_val", xlen, False)': 0
-        'walking_zeros("rs1_val", xlen, False)': 0
-        'walking_zeros("rs2_val", xlen, False)': 0
+      <<: [*base_rs1val_sgn , *base_rs2val_sgn , *rfmt_val_comb_sgn]
+      abstract_comb:
+        'sp_dataset(xlen)': 0
+        'walking_ones("rs1_val", xlen)': 0
+        'walking_zeros("rs1_val", xlen)': 0
+        'alternate("rs1_val",xlen)': 0
+        'walking_ones("rs2_val", xlen)': 0
+        'walking_zeros("rs2_val", xlen)': 0
+        'alternate("rs2_val",xlen)': 0
         
 sh3add.uw:
     config: 
@@ -128,16 +138,20 @@ sh3add.uw:
       sh3add.uw: 0
     rs1: 
       <<: *all_regs
-    rs2: 
-      <<: *all_regs
     rd:
       <<: *all_regs
     op_comb: 
-      <<: *rfmt_op_comb
+      <<: *ifmt_op_comb
     val_comb:
-      abstract_comb:      
-        'byte_count(64, ["rs1_val","rs2_val"])': 0
-        'uniform_random(20, 100, ["rs1_val","rs2_val"], [64, 64])': 0
+      <<: [*base_rs1val_sgn , *base_rs2val_sgn , *rfmt_val_comb_sgn]
+      abstract_comb:
+        'sp_dataset(xlen)': 0
+        'walking_ones("rs1_val", xlen)': 0
+        'walking_zeros("rs1_val", xlen)': 0
+        'alternate("rs1_val",xlen)': 0
+        'walking_ones("rs2_val", xlen)': 0
+        'walking_zeros("rs2_val", xlen)': 0
+        'alternate("rs2_val",xlen)': 0
         
 slli.uw:
     config: 
@@ -153,6 +167,4 @@ slli.uw:
       <<: *ifmt_op_comb
     val_comb:
       abstract_comb:      
-        'byte_count(64, ["rs1_val","rs2_val"])': 0
-        'uniform_random(20, 100, ["rs1_val","rs2_val"], [64, 64])': 0
-        
+        'xlenlim("rs1_val", xlen)': 0

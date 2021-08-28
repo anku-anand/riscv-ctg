@@ -1,0 +1,15 @@
+slli.uw:
+    config: 
+      - check ISA:=regex(.*RV64.*I.*B.*)
+      - check ISA:=regex(.*RV64.*I.*Zba.*)
+    opcode: 
+      slli.uw: 0
+    rs1: 
+      <<: *all_regs
+    rd:
+      <<: *all_regs
+    op_comb: 
+      <<: *ifmt_op_comb
+    val_comb:
+      abstract_comb:      
+        'xlenlim("rs1_val", xlen)': 0

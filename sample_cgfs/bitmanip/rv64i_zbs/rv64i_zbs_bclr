@@ -1,0 +1,21 @@
+bclr:
+    config: 
+      - check ISA:=regex(.*RV64.*I.*B.*)
+      - check ISA:=regex(.*RV64.*I.*Zbs.*)
+    opcode: 
+      bclr: 0
+    rs1: 
+      <<: *all_regs
+    rs2: 
+      <<: *all_regs
+    rd:
+      <<: *all_regs
+    op_comb: 
+      <<: *rfmt_op_comb
+    val_comb:
+      abstract_comb:
+        'xlenlim("rs1_val", xlen)': 0
+        'xlenlim("rs2_val", xlen )': 0
+        'walking_ones("rs1_val", ceil(log(xlen, 2)), False)': 0
+        'walking_ones("rs2_val", ceil(log(xlen, 2)), False)': 0
+       

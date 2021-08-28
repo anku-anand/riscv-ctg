@@ -13,13 +13,16 @@ sh1add:
     op_comb: 
       <<: *rfmt_op_comb
     val_comb:
-      abstract_comb:      
-        'walking_ones("rs1_val", xlen, False)': 0
-        'walking_ones("rs2_val", xlen, False)': 0
-        'walking_zeros("rs1_val", xlen, False)': 0
-        'walking_zeros("rs2_val", xlen, False)': 0
-
-        
+      <<: [*base_rs1val_sgn , *base_rs2val_sgn , *rfmt_val_comb_sgn]
+      abstract_comb:
+        'sp_dataset(xlen)': 0
+        'walking_ones("rs1_val", xlen)': 0
+        'walking_zeros("rs1_val", xlen)': 0
+        'alternate("rs1_val",xlen)': 0
+        'walking_ones("rs2_val", xlen)': 0
+        'walking_zeros("rs2_val", xlen)': 0
+        'alternate("rs2_val",xlen)': 0
+      
 sh2add:
     config: 
       - check ISA:=regex(.*RV32.*I.*B.*)
@@ -35,11 +38,15 @@ sh2add:
     op_comb: 
       <<: *rfmt_op_comb
     val_comb:
-      abstract_comb:      
-        'walking_ones("rs1_val", xlen, False)': 0
-        'walking_ones("rs2_val", xlen, False)': 0
-        'walking_zeros("rs1_val", xlen, False)': 0
-        'walking_zeros("rs2_val", xlen, False)': 0
+      <<: [*base_rs1val_sgn , *base_rs2val_sgn , *rfmt_val_comb_sgn]
+      abstract_comb:
+        'sp_dataset(xlen)': 0
+        'walking_ones("rs1_val", xlen)': 0
+        'walking_zeros("rs1_val", xlen)': 0
+        'alternate("rs1_val",xlen)': 0
+        'walking_ones("rs2_val", xlen)': 0
+        'walking_zeros("rs2_val", xlen)': 0
+        'alternate("rs2_val",xlen)': 0
 
         
 sh3add:
@@ -57,9 +64,13 @@ sh3add:
     op_comb: 
       <<: *rfmt_op_comb
     val_comb:
-      abstract_comb:      
-        'walking_ones("rs1_val", xlen, False)': 0
-        'walking_ones("rs2_val", xlen, False)': 0
-        'walking_zeros("rs1_val", xlen, False)': 0
-        'walking_zeros("rs2_val", xlen, False)': 0
+      <<: [*base_rs1val_sgn , *base_rs2val_sgn , *rfmt_val_comb_sgn]
+      abstract_comb:
+        'sp_dataset(xlen)': 0
+        'walking_ones("rs1_val", xlen)': 0
+        'walking_zeros("rs1_val", xlen)': 0
+        'alternate("rs1_val",xlen)': 0
+        'walking_ones("rs2_val", xlen)': 0
+        'walking_zeros("rs2_val", xlen)': 0
+        'alternate("rs2_val",xlen)': 0
 

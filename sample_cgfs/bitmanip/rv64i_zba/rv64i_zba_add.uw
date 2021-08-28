@@ -1,0 +1,16 @@
+add.uw:
+    config: 
+      - check ISA:=regex(.*RV64.*I.*B.*)
+      - check ISA:=regex(.*RV64.*I.*Zba.*)
+    opcode: 
+      add.uw: 0
+    rs1: 
+      <<: *all_regs
+    rd:
+      <<: *all_regs
+    op_comb: 
+      <<: *ifmt_op_comb
+    val_comb:
+      abstract_comb:
+        'walking_ones("rs1_val", xlen)': 0
+        'walking_ones("rs2_val", xlen)': 0

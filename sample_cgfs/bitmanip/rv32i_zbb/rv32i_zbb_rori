@@ -1,0 +1,22 @@
+rori:
+    config: 
+      - check ISA:=regex(.*RV32.*I.*B.*)
+      - check ISA:=regex(.*RV32.*I.*Zbb.*)
+    opcode: 
+      rori: 0
+    rs1: 
+      <<: *all_regs
+    rd:
+      <<: *all_regs
+    op_comb: 
+      <<: *ifmt_op_comb
+    val_comb:
+      <<: *ifmt_base_shift
+      abstract_comb:      
+        'sp_dataset(xlen,["rs1_val"])': 0
+        'walking_ones("rs1_val", xlen)': 0
+        'walking_zeros("rs1_val", xlen)': 0
+        'alternate("rs1_val",xlen)': 0
+        'walking_ones("imm_val", ceil(log(xlen,2)), False)': 0
+        'walking_zeros("imm_val", ceil(log(xlen,2)), False)': 0
+        'alternate("imm_val", ceil(log(xlen,2)), False)': 0

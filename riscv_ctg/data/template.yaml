@@ -1780,13 +1780,13 @@ sha512sum1r:
 ror:
   xlen: [32,64]
   std_op:
-  isa: I
+  isa: K
   formattype: 'rformat'
   rs1_op_data: *all_regs
   rs2_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
-  rs2_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'gen_sign_dataset(xlen) + gen_sp_dataset(xlen,True)'
+  rs2_val_data: 'gen_usign_dataset(ceil(log(xlen,2)))'
   template: |-
 
     // $comment
@@ -1796,13 +1796,13 @@ ror:
 rol:
   xlen: [32,64]
   std_op:
-  isa: I
+  isa: K
   formattype: 'rformat'
   rs1_op_data: *all_regs
   rs2_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
-  rs2_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'gen_sign_dataset(xlen) + gen_sp_dataset(xlen,True)'
+  rs2_val_data: 'gen_usign_dataset(ceil(log(xlen,2)))'
   template: |-
 
     // $comment
@@ -1816,7 +1816,8 @@ rori:
   formattype: 'iformat'
   rs1_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'gen_sign_dataset(xlen)+ gen_sp_dataset(xlen,True)'
+  imm_val_data: 'gen_usign_dataset(ceil(log(xlen,2)))'
   template: |-
 
     // $comment
@@ -1846,7 +1847,7 @@ rev8:
   formattype: 'kformat'
   rs1_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)+[16909320,33818625,67633410,134283780,72624976414508040,145249888404506625,290483284134592770,576744443617542660]'
   template: |-
 
     // $comment
@@ -1891,7 +1892,7 @@ unzip:
 clmul:
   xlen: [32,64]
   std_op:
-  isa: I
+  isa: K
   formattype: 'rformat'
   rs1_op_data: *all_regs
   rs2_op_data: *all_regs
@@ -1907,7 +1908,7 @@ clmul:
 clmulh:
   xlen: [32,64]
   std_op:
-  isa: I
+  isa: K
   formattype: 'rformat'
   rs1_op_data: *all_regs
   rs2_op_data: *all_regs
@@ -1923,13 +1924,13 @@ clmulh:
 andn:
   xlen: [32,64]
   std_op:
-  isa: I
+  isa: K
   formattype: 'rformat'
   rs1_op_data: *all_regs
   rs2_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
-  rs2_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'gen_sign_dataset(xlen) + gen_sp_dataset(xlen,True)'
+  rs2_val_data: 'gen_sign_dataset(xlen) + gen_sp_dataset(xlen,True)'
   template: |-
 
     // $comment
@@ -1939,13 +1940,13 @@ andn:
 orn:
   xlen: [32,64]
   std_op:
-  isa: I
+  isa: K
   formattype: 'rformat'
   rs1_op_data: *all_regs
   rs2_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
-  rs2_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'gen_sign_dataset(xlen) + gen_sp_dataset(xlen,True)'
+  rs2_val_data: 'gen_sign_dataset(xlen) + gen_sp_dataset(xlen,True)'
   template: |-
 
     // $comment
@@ -1955,13 +1956,13 @@ orn:
 xnor:
   xlen: [32,64]
   std_op:
-  isa: I
+  isa: K
   formattype: 'rformat'
   rs1_op_data: *all_regs
   rs2_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
-  rs2_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'gen_sign_dataset(xlen)+gen_sp_dataset(xlen)'
+  rs2_val_data: 'gen_sign_dataset(xlen)+gen_sp_dataset(xlen)'
   template: |-
 
     // $comment
@@ -2212,12 +2213,12 @@ rorw:
   xlen: [64]
   std_op:
   isa: I
-  formattype: 'kformat'
+  formattype: 'rformat'
   rs1_op_data: *all_regs
   rs2_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
-  rs2_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'gen_sign_dataset(xlen)+gen_sp_dataset(xlen)'
+  rs2_val_data: 'gen_usign_dataset(ceil(log(xlen,2)))'
   template: |-
 
     // $comment
@@ -2232,8 +2233,8 @@ rolw:
   rs1_op_data: *all_regs
   rs2_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
-  rs2_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'gen_sign_dataset(xlen)+gen_sp_dataset(xlen)'
+  rs2_val_data: 'gen_usign_dataset(ceil(log(xlen,2)))'
   template: |-
 
     // $comment
@@ -2244,10 +2245,11 @@ roriw:
   xlen: [64]
   std_op:
   isa: I
-  formattype: 'kformat'
+  formattype: 'iformat'
   rs1_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'gen_sign_dataset(xlen)+ gen_sp_dataset(xlen,True)'
+  imm_val_data: 'gen_usign_dataset(ceil(log(xlen,2)))'
   template: |-
 
     // $comment
@@ -2301,13 +2303,13 @@ packuw:
 add.uw:
   xlen: [64]
   std_op:
-  isa: I
+  isa: K
   formattype: 'rformat'
   rs1_op_data: *all_regs
   rs2_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
-  rs2_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'gen_sp_dataset(xlen)+gen_sign_dataset(xlen)'
+  rs2_val_data: 'gen_sp_dataset(xlen)+gen_sign_dataset(xlen)'
   template: |-
 
     // $comment
@@ -2317,13 +2319,13 @@ add.uw:
 sh1add:
   xlen: [32,64]
   std_op:
-  isa: I
+  isa: K
   formattype: 'rformat'
   rs1_op_data: *all_regs
   rs2_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
-  rs2_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'gen_sign_dataset(xlen) + gen_sp_dataset(xlen,True)'
+  rs2_val_data: 'gen_sign_dataset(xlen) + gen_sp_dataset(xlen,True)'
   template: |-
 
     // $comment
@@ -2333,13 +2335,13 @@ sh1add:
 sh1add.uw:
   xlen: [64]
   std_op:
-  isa: I
+  isa: K
   formattype: 'rformat'
   rs1_op_data: *all_regs
   rs2_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
-  rs2_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'gen_sign_dataset(xlen) + gen_sp_dataset(xlen,True)'
+  rs2_val_data: 'gen_sign_dataset(xlen) + gen_sp_dataset(xlen,True)'
   template: |-
 
     // $comment
@@ -2349,13 +2351,13 @@ sh1add.uw:
 sh2add:
   xlen: [32,64]
   std_op:
-  isa: I
+  isa: K
   formattype: 'rformat'
   rs1_op_data: *all_regs
   rs2_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
-  rs2_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'gen_sign_dataset(xlen)+gen_sp_dataset(xlen)'
+  rs2_val_data: 'gen_sign_dataset(xlen)+gen_sp_dataset(xlen)'
   template: |-
 
     // $comment
@@ -2365,13 +2367,13 @@ sh2add:
 sh2add.uw:
   xlen: [64]
   std_op:
-  isa: I
+  isa: K
   formattype: 'rformat'
   rs1_op_data: *all_regs
   rs2_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
-  rs2_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'gen_sign_dataset(xlen) + gen_sp_dataset(xlen,True)'
+  rs2_val_data: 'gen_sign_dataset(xlen) + gen_sp_dataset(xlen,True)'
   template: |-
 
     // $comment
@@ -2381,13 +2383,13 @@ sh2add.uw:
 sh3add:
   xlen: [32,64]
   std_op:
-  isa: I
+  isa: K
   formattype: 'rformat'
   rs1_op_data: *all_regs
   rs2_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
-  rs2_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'gen_sign_dataset(xlen)+gen_sp_dataset(xlen)'
+  rs2_val_data: 'gen_sign_dataset(xlen)+gen_sp_dataset(xlen)'
   template: |-
 
     // $comment
@@ -2397,13 +2399,13 @@ sh3add:
 sh3add.uw:
   xlen: [64]
   std_op:
-  isa: I
+  isa: K
   formattype: 'rformat'
   rs1_op_data: *all_regs
   rs2_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
-  rs2_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'gen_sign_dataset(xlen) + gen_sp_dataset(xlen,True)'
+  rs2_val_data: 'gen_sign_dataset(xlen) + gen_sp_dataset(xlen,True)'
   template: |-
 
     // $comment
@@ -2413,11 +2415,11 @@ sh3add.uw:
 slli.uw:
   xlen: [64]
   std_op:
-  isa: I
+  isa: K
   formattype: 'iformat'
   rs1_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'zerotoxlen(xlen)'
   template: |-
 
     // $comment
@@ -2427,11 +2429,11 @@ slli.uw:
 zext:
   xlen: [32,64]
   std_op:
-  isa: I
+  isa: K
   formattype: 'kformat'
   rs1_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'gen_usign_dataset(xlen)+[65408]'
   template: |-
  
     // $comment
@@ -2441,7 +2443,7 @@ zext:
 clz:
   xlen: [32,64]
   std_op:
-  isa: I
+  isa: K
   formattype: 'kformat'
   rs1_op_data: *all_regs
   rd_op_data: *all_regs
@@ -2455,7 +2457,7 @@ clz:
 clzw:
   xlen: [64]
   std_op:
-  isa: I
+  isa: K
   formattype: 'kformat'
   rs1_op_data: *all_regs
   rd_op_data: *all_regs
@@ -2469,7 +2471,7 @@ clzw:
 cpop:
   xlen: [32,64]
   std_op:
-  isa: I
+  isa: K
   formattype: 'kformat'
   rs1_op_data: *all_regs
   rd_op_data: *all_regs
@@ -2483,7 +2485,7 @@ cpop:
 cpopw:
   xlen: [64]
   std_op:
-  isa: I
+  isa: K
   formattype: 'kformat'
   rs1_op_data: *all_regs
   rd_op_data: *all_regs
@@ -2497,7 +2499,7 @@ cpopw:
 ctz:
   xlen: [32,64]
   std_op:
-  isa: I
+  isa: K
   formattype: 'kformat'
   rs1_op_data: *all_regs
   rd_op_data: *all_regs
@@ -2511,7 +2513,7 @@ ctz:
 ctzw:
   xlen: [64]
   std_op:
-  isa: I
+  isa: K
   formattype: 'kformat'
   rs1_op_data: *all_regs
   rd_op_data: *all_regs
@@ -2525,13 +2527,13 @@ ctzw:
 max:
   xlen: [32,64]
   std_op:
-  isa: I
+  isa: K
   formattype: 'rformat'
   rs1_op_data: *all_regs
   rs2_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
-  rs2_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'gen_sign_dataset(xlen) + gen_sp_dataset(xlen,True)'
+  rs2_val_data: 'gen_sign_dataset(xlen) + gen_sp_dataset(xlen,True)'
   template: |-
 
     // $comment
@@ -2541,13 +2543,13 @@ max:
 maxu:
   xlen: [32,64]
   std_op:
-  isa: I
+  isa: K
   formattype: 'rformat'
   rs1_op_data: *all_regs
   rs2_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
-  rs2_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'gen_usign_dataset(xlen) + gen_sp_dataset(xlen,False)'
+  rs2_val_data: 'gen_usign_dataset(xlen) + gen_sp_dataset(xlen,False)'
   template: |-
 
     // $comment
@@ -2557,13 +2559,13 @@ maxu:
 min:
   xlen: [32,64]
   std_op:
-  isa: I
+  isa: K
   formattype: 'rformat'
   rs1_op_data: *all_regs
   rs2_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
-  rs2_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'gen_sign_dataset(xlen) + gen_sp_dataset(xlen,True)'
+  rs2_val_data: 'gen_sign_dataset(xlen) + gen_sp_dataset(xlen,True)'
   template: |-
 
     // $comment
@@ -2573,13 +2575,13 @@ min:
 minu:
   xlen: [32,64]
   std_op:
-  isa: I
+  isa: K
   formattype: 'rformat'
   rs1_op_data: *all_regs
   rs2_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
-  rs2_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'gen_usign_dataset(xlen) + gen_sp_dataset(xlen,False)'
+  rs2_val_data: 'gen_usign_dataset(xlen) + gen_sp_dataset(xlen,False)'
   template: |-
 
     // $comment
@@ -2593,7 +2595,7 @@ orc.b:
   formattype: 'kformat'
   rs1_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)+[16909320,33818625,67633410,134283780,72624976414508040,145249888404506625,290483284134592770,576744443617542660]'
   template: |-
   
     // $comment
@@ -2603,7 +2605,7 @@ orc.b:
 sext.b:
   xlen: [32,64]
   std_op:
-  isa: I
+  isa: K
   formattype: 'kformat'
   rs1_op_data: *all_regs
   rd_op_data: *all_regs
@@ -2617,11 +2619,11 @@ sext.b:
 sext.h:
   xlen: [32,64]
   std_op:
-  isa: I
+  isa: K
   formattype: 'kformat'
   rs1_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)+[65408]'
   template: |-
  
     // $comment
@@ -2631,7 +2633,7 @@ sext.h:
 clmulr:
   xlen: [32,64]
   std_op:
-  isa: I
+  isa: K
   formattype: 'rformat'
   rs1_op_data: *all_regs
   rs2_op_data: *all_regs
@@ -2652,8 +2654,8 @@ bclr:
   rs1_op_data: *all_regs
   rs2_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
-  rs2_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'zerotoxlen(xlen)+gen_sign_dataset(xlen)+[-1]'
+  rs2_val_data: 'zerotoxlen(xlen)+gen_sign_dataset(xlen)+[-1]'
   template: |-
 
     // $comment
@@ -2667,7 +2669,7 @@ bclri:
   formattype: 'iformat'
   rs1_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'zerotoxlen(xlen)+[-1]'
   template: |-
 
     // $comment
@@ -2682,8 +2684,8 @@ bext:
   rs1_op_data: *all_regs
   rs2_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
-  rs2_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'zerotoxlen(xlen)+gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs2_val_data: 'zerotoxlen(xlen)+gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
   template: |-
 
     // $comment
@@ -2697,7 +2699,7 @@ bexti:
   formattype: 'iformat'
   rs1_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'zerotoxlen(xlen)+gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
   template: |-
 
     // $comment
@@ -2712,8 +2714,8 @@ binv:
   rs1_op_data: *all_regs
   rs2_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
-  rs2_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'zerotoxlen(xlen)+gen_sign_dataset(xlen)+gen_sp_dataset(xlen)'
+  rs2_val_data: 'zerotoxlen(xlen)+gen_sign_dataset(xlen)+gen_sp_dataset(xlen)'
   template: |-
 
     // $comment
@@ -2727,7 +2729,7 @@ binvi:
   formattype: 'iformat'
   rs1_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'zerotoxlen(xlen)+gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
   template: |-
 
     // $comment
@@ -2742,8 +2744,8 @@ bset:
   rs1_op_data: *all_regs
   rs2_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
-  rs2_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'zerotoxlen(xlen)+gen_sign_dataset(xlen)'
+  rs2_val_data: 'zerotoxlen(xlen)+gen_sign_dataset(xlen)'
   template: |-
 
     // $comment
@@ -2757,7 +2759,7 @@ bseti:
   formattype: 'iformat'
   rs1_op_data: *all_regs
   rd_op_data: *all_regs
-  rs1_val_data: 'gen_sign_dataset(xlen)+gen_usign_dataset(xlen)'
+  rs1_val_data: 'zerotoxlen(xlen)'
   template: |-
 
     // $comment

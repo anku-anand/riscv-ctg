@@ -1,0 +1,15 @@
+binvi:
+    config: 
+      - check ISA:=regex(.*RV32.*I.*B.*)
+      - check ISA:=regex(.*RV32.*I.*Zbs.*)
+    opcode: 
+      binvi: 0
+    rs1: 
+      <<: *all_regs
+    rd:
+      <<: *all_regs
+    op_comb: 
+      <<: *ifmt_op_comb
+    val_comb:
+      abstract_comb:      
+        'xlenlim("rs1_val", xlen)': 0

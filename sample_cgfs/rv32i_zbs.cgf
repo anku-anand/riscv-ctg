@@ -13,12 +13,7 @@ bclr:
     op_comb: 
       <<: *rfmt_op_comb
     val_comb:
-      abstract_comb:
-        'walking_ones("rs1_val", xlen, False)': 0
-        'walking_ones("rs2_val", xlen, False)': 0
-        'walking_zeros("rs1_val", xlen, False)': 0
-        'walking_zeros("rs2_val", xlen, False)': 0
-        'uniform_random(20, 100, ["rs1_val","rs2_val"], [xlen, xlen])': 0
+      'rs1_val == -1 and rs2_val == -1': 0
         
 bclri:
     config: 
@@ -33,11 +28,7 @@ bclri:
     op_comb: 
       <<: *ifmt_op_comb
     val_comb:
-      abstract_comb:      
-        'leading_ones(32, ["rs1_val", "imm_val"], [32,5])': 0
-        'trailing_ones(32, ["rs1_val", "imm_val"], [32,5])': 0
-        'leading_zeros(32, ["rs1_val", "imm_val"], [32,5])': 0
-        'trailing_zeros(32, ["rs1_val", "imm_val"], [32,5])': 0
+      'rs1_val == -1': 0      
         
 bext:
     config: 
@@ -59,7 +50,6 @@ bext:
         'walking_ones("rs2_val", xlen, False)': 0
         'walking_zeros("rs1_val", xlen, False)': 0
         'walking_zeros("rs2_val", xlen, False)': 0
-        'uniform_random(20, 100, ["rs1_val","rs2_val"], [xlen, xlen])': 0
         
 bexti:
     config: 
@@ -75,10 +65,8 @@ bexti:
       <<: *ifmt_op_comb
     val_comb:
       abstract_comb:      
-        'leading_ones(32, ["rs1_val", "imm_val"], [32,5])': 0
-        'trailing_ones(32, ["rs1_val", "imm_val"], [32,5])': 0
-        'leading_zeros(32, ["rs1_val", "imm_val"], [32,5])': 0
-        'trailing_zeros(32, ["rs1_val", "imm_val"], [32,5])': 0
+        'walking_ones("rs1_val", xlen, False)': 0
+        'walking_zeros("rs1_val", xlen, False)': 0
         
 binv:
     config: 
@@ -96,11 +84,10 @@ binv:
       <<: *rfmt_op_comb
     val_comb:
       abstract_comb:
-        'walking_ones("rs1_val", xlen, False)': 0
-        'walking_ones("rs2_val", xlen, False)': 0
-        'walking_zeros("rs1_val", xlen, False)': 0
-        'walking_zeros("rs2_val", xlen, False)': 0
-        'uniform_random(20, 100, ["rs1_val","rs2_val"], [xlen, xlen])': 0
+        'xlenlim("rs1_val", xlen)': 0
+        'xlenlim("rs2_val", xlen )': 0
+        'walking_ones("rs1_val", ceil(log(xlen, 2)), False)': 0
+        'walking_ones("rs2_val", ceil(log(xlen, 2)), False)': 0
         
 binvi:
     config: 
@@ -116,10 +103,7 @@ binvi:
       <<: *ifmt_op_comb
     val_comb:
       abstract_comb:      
-        'leading_ones(32, ["rs1_val", "imm_val"], [32,5])': 0
-        'trailing_ones(32, ["rs1_val", "imm_val"], [32,5])': 0
-        'leading_zeros(32, ["rs1_val", "imm_val"], [32,5])': 0
-        'trailing_zeros(32, ["rs1_val", "imm_val"], [32,5])': 0
+        'xlenlim("rs1_val", xlen)': 0
         
 bset:
     config: 
@@ -136,12 +120,7 @@ bset:
     op_comb: 
       <<: *rfmt_op_comb
     val_comb:
-      abstract_comb:
-        'walking_ones("rs1_val", xlen, False)': 0
-        'walking_ones("rs2_val", xlen, False)': 0
-        'walking_zeros("rs1_val", xlen, False)': 0
-        'walking_zeros("rs2_val", xlen, False)': 0
-        'uniform_random(20, 100, ["rs1_val","rs2_val"], [xlen, xlen])': 0
+      'rs1_val == 0 and rs2_val == 0': 0
         
 bseti:
     config: 
@@ -156,8 +135,4 @@ bseti:
     op_comb: 
       <<: *ifmt_op_comb
     val_comb:
-      abstract_comb:      
-        'leading_ones(32, ["rs1_val", "imm_val"], [32,5])': 0
-        'trailing_ones(32, ["rs1_val", "imm_val"], [32,5])': 0
-        'leading_zeros(32, ["rs1_val", "imm_val"], [32,5])': 0
-        'trailing_zeros(32, ["rs1_val", "imm_val"], [32,5])': 0
+      'rs1_val == 0': 0     

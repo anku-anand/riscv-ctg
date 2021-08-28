@@ -1,0 +1,14 @@
+bseti:
+    config: 
+      - check ISA:=regex(.*RV32.*I.*B.*)
+      - check ISA:=regex(.*RV32.*I.*Zbs.*)
+    opcode: 
+      bseti: 0
+    rs1: 
+      <<: *all_regs
+    rd:
+      <<: *all_regs
+    op_comb: 
+      <<: *ifmt_op_comb
+    val_comb:
+      'rs1_val == 0': 0

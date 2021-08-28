@@ -1,0 +1,27 @@
+clmulh:
+    config: 
+      - check ISA:=regex(.*RV64.*I.*B.*)
+      - check ISA:=regex(.*RV64.*I.*Zbc.*)
+    opcode: 
+      clmulh: 0
+    rs1: 
+      <<: *all_regs
+    rs2: 
+      <<: *all_regs
+    rd:
+      <<: *all_regs
+    op_comb: 
+      <<: *rfmt_op_comb
+    val_comb:
+      'rs1_val==1 and rs2_val==1': 0
+      'rs1_val==1 and rs2_val==0': 0 
+      'rs1_val==1 and rs2_val==-1': 0
+      'rs1_val==1 and rs2_val==4096': 0
+      'rs1_val==0 and rs2_val==1': 0
+      'rs1_val==0 and rs2_val==0': 0 
+      'rs1_val==0 and rs2_val==-1': 0
+      'rs1_val==0 and rs2_val==4096': 0
+      'rs1_val==-1 and rs2_val==1': 0
+      'rs1_val==-1 and rs2_val==0': 0 
+      'rs1_val==-1 and rs2_val==-1': 0
+      'rs1_val==-1 and rs2_val==4096': 0
